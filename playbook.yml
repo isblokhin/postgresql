@@ -1,0 +1,94 @@
+---
+  
+  - name: install postfix and dovecot
+    hosts: master
+    gather_facts: master
+    remote_user: vagrant
+    become: true
+   
+    tasks:
+    - name: install packages
+      include_vars: vars.yml
+    - name: install packages
+      yum: 
+        name: "{{ packages }}"
+        state: present
+      notify: 
+      - postgresql enable
+      - postgresql start
+      - barman enable
+      - barman start
+
+#    - name: insert config export
+#      lineinfile:
+#        path: /etc/exports
+#        line: /mnt/upload 10.0.0.2(rw,sync,root_squash,no_subtree_check,crossmnt,fsid=0)
+#        state: present
+#      notify: nfs-server restart
+
+#    - name: Insert a rule on line 5
+#      iptables:
+#        chain: FORWARD
+#        jump: ACCEPT
+#        action: insert
+#        rule_num: 2
+
+    - name: enable ntpd
+      systemd:
+        name: ntpd
+        enabled: true
+      notify: ntpd restart
+
+    - name: set timezone
+      timezone:
+        name: Europe/Moscow
+
+    - name: insert name hosts
+      lineinfile:
+        path: /etc/hosts
+        line: 10.0.0.2 slave
+        state: present
+     
+    handlers:
+    - include: hand.yml
+      
+      
+
+  - hosts: slave
+    become: yes
+    tasks:
+    - name: include default step variables
+      include_vars: vars.yml
+
+    - name: install packages
+      yum:
+        name: "{{ clientpackages }}"
+        state: present
+      notify:
+      - postgresql enable
+      - postgresql start
+      - barman enable
+      - barman start
+
+     - name: enable ntpd
+      systemd:
+        name: ntpd
+        enabled: true
+      notify: ntpd restart
+
+    - name: set timezone
+      timezone:
+        name: Europe/Moscow
+
+    - name: insert name hosts
+      lineinfile:
+        path: /etc/hosts
+        line: 10.0.0.1 master
+        state: present
+    
+
+
+    handlers:
+    - include: hand.yml
+
+...
