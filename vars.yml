@@ -1,0 +1,15 @@
+---
+  packages:
+  - ntp
+  - epel-release
+  - nano
+  - mc
+  - postgresql
+  - barman
+  clientpackages:
+  - nano
+  - epel-release
+  - telnet
+  - mc
+  - postgresql
+  - barman
