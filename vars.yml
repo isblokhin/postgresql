@@ -4,7 +4,6 @@
   - epel-release
   - nano
   - mc
-  - https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
   - postgresql12
   - postgresql12-server
   - barman
@@ -13,7 +12,6 @@
   - nano
   - epel-release
   - mc
-  - https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
   - postgresql12
   - postgresql12-server
   - barman
