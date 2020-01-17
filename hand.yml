@@ -1,20 +1,20 @@
 --- 
   - name: postgresql start
     systemd:
-      name: postgresql
+      name: postgresql12
       state: started
-  - name: barman start
-    systemd:
-      name: barman
-      state: started
+#  - name: barman start
+#    systemd:
+#      name: barman
+#      state: started
   - name: postgresql enable
     systemd:
-      name: postgresql
+      name: postgresql12
       enabled: yes
-  - name: barman enable
-    systemd:
-      name: rpcbind
-      enabled: yes
+#  - name: barman enable
+#    systemd:
+#      name: rpcbind
+#      enabled: yes
   - name: ntpd restart
     systemd:
       name: ntpd
@@ -22,12 +22,12 @@
 
   - name: postgresql restart
     systemd:
-      name: postgresql
+      name: postgresql12
       state: restarted 
 
   - name: postgresql reload
     systemd:
-      name: potgresql
+      name: potgresql12
       state: reloaded
 
 ...

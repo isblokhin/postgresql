@@ -1,12 +1,17 @@
 ---
   
-  - name: install postfix and dovecot
+  - name: install postgresql and barman
     hosts: master
     gather_facts: master
     remote_user: vagrant
     become: true
    
     tasks:
+    - name: install repo for posgtresql 12
+      yum:
+        name: https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+        state: present
+
     - name: install packages
       include_vars: vars.yml
     - name: install packages
@@ -16,8 +21,6 @@
       notify: 
       - postgresql enable
       - postgresql start
-      - barman enable
-      - barman start
 
 #    - name: insert config export
 #      lineinfile:
@@ -57,6 +60,12 @@
   - hosts: slave
     become: yes
     tasks:
+    - name: install repo fot postgresql 12
+      yum:
+        name: https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+        state: present
+
+
     - name: include default step variables
       include_vars: vars.yml
 
@@ -67,10 +76,8 @@
       notify:
       - postgresql enable
       - postgresql start
-      - barman enable
-      - barman start
 
-     - name: enable ntpd
+    - name: enable ntpd
       systemd:
         name: ntpd
         enabled: true
@@ -86,8 +93,6 @@
         line: 10.0.0.1 master
         state: present
     
-
-
     handlers:
     - include: hand.yml
 
