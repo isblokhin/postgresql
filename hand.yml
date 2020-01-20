@@ -1,7 +1,7 @@
 --- 
   - name: postgresql start
     systemd:
-      name: postgresql12
+      name: postgresql-12
       state: started
 #  - name: barman start
 #    systemd:
@@ -9,7 +9,7 @@
 #      state: started
   - name: postgresql enable
     systemd:
-      name: postgresql12
+      name: postgresql-12
       enabled: yes
 #  - name: barman enable
 #    systemd:
@@ -22,12 +22,12 @@
 
   - name: postgresql restart
     systemd:
-      name: postgresql12
+      name: postgresql-12
       state: restarted 
 
   - name: postgresql reload
     systemd:
-      name: potgresql12
+      name: potgresql-12
       state: reloaded
 
 ...

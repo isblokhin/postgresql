@@ -7,7 +7,7 @@ MACHINES = {
     :box_name => "centos/7",
     :ip_addr => "10.0.0.1",
     :memory => "256",
-    :ansible => "playbook1.yml"
+    :ansible => "playbook.yml"
   },
   :"slave" => {
     :box_name => "centos/7",
