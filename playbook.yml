@@ -10,7 +10,7 @@
     - name: install repo for posgtresql 12
       yum:
         name: https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
-        state: present
+        state: installed
 
     - name: install packages
       include_vars: vars.yml
@@ -63,8 +63,7 @@
     - name: install repo fot postgresql 12
       yum:
         name: https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
-        state: present
-
+        state: installed
 
     - name: include default step variables
       include_vars: vars.yml
