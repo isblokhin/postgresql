@@ -1,0 +1,20 @@
+---
+
+  - name: install postgresql and barman
+    hosts: master
+    gather_facts: master
+    remote_user: vagrant
+    become: true
+
+    tasks:
+    - name: install packages
+      yum:
+        name: 
+        - epel-release
+        - https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+        - mc
+        - nano
+        - postgresql12
+        - postgresql12-server
+        state: present
+
