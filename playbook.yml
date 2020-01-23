@@ -19,8 +19,8 @@
         name: "{{ packages }}"
         state: present
       notify: 
-      - postgresql enable
-      - postgresql start
+#      - postgresql enable
+#      - postgresql start
 
 #    - name: insert config export
 #      lineinfile:
@@ -73,8 +73,8 @@
         name: "{{ clientpackages }}"
         state: present
       notify:
-      - postgresql enable
-      - postgresql start
+  #    - postgresql enable
+  #   - postgresql start
 
     - name: enable ntpd
       systemd:
